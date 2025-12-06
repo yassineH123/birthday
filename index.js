@@ -1,5 +1,4 @@
-// Texte amoureux (amélioré pour plus d'émotion)
-const text = `Nouhayla, mon cœur qui bat,
+const text = `Nouhayla mon cœur qui bat,
 
 Aujourd’hui tu as 20 ans… et moi j’ai la chance immense de t’avoir dans ma vie tous les jours depuis qu’on s’est trouvés.
 
@@ -11,14 +10,14 @@ Je ne sais pas ce que j’ai fait pour te mériter, mais je passerai ma vie à e
 
 Tu es la plus belle chose qui me soit arrivée, et je remercie le ciel tous les jours de t’avoir mise sur mon chemin.
 
-Joyeux anniversaire mon amour, ma Nouhayla, ma vie.
+Joyeux anniversaire mon amour.
 Je t’aime plus que tout.
-Pour toujours et un jour de plus. ♡
+Pour toujours ♡
 
-– Ton chéri qui t’aime à l’infini`;
+– yassine`;
 
 let i = 0;
-const speed = 40; // Un peu plus rapide pour fluidité
+const speed = 45;
 const messageEl = document.getElementById("message");
 
 function typeWriter() {
@@ -27,63 +26,40 @@ function typeWriter() {
     i++;
     setTimeout(typeWriter, speed);
   } else {
-    messageEl.style.opacity = 1;
+    // Fin → on enlève le curseur
+    document.querySelector(".love-letter").style.borderRight = "none";
     showPhotos();
   }
 }
 
-// Afficher les photos progressivement avec un effet plus doux
 function showPhotos() {
-  const imgs = document.querySelectorAll(".photos img");
-  imgs.forEach((img, index) => {
-    setTimeout(() => img.classList.add("show"), 300 + index * 400);
+  document.querySelectorAll(".photos img").forEach((img, idx) => {
+    setTimeout(() => img.classList.add("show"), 300 + idx * 400);
   });
 }
 
-// Musique avec loop et volume ajusté
 function playMusic() {
   const audio = document.getElementById("song");
   audio.volume = 0.5;
   if (audio.paused) {
     audio.play();
-    this.textContent = "♡ Musique en cours... ♡";
+    this.textContent = "Musique en cours...";
   } else {
     audio.pause();
-    this.textContent = "♡ Joue notre chanson ♡";
+    this.textContent = "Jouer notre chanson";
   }
 }
 
-// Pétales de roses avec plus de variété
+// Pétales
 function createPetal() {
-  const petal = document.createElement("div");
-  petal.classList.add("petal");
-  petal.style.left = Math.random() * 100 + "vw";
-  petal.style.animationDuration = Math.random() * 8 + 10 + "s";
-  petal.style.width = Math.random() * 10 + 20 + "px";
-  petal.style.height = Math.random() * 10 + 25 + "px";
-  document.body.appendChild(petal);
-  setTimeout(() => petal.remove(), 18000);
+  const p = document.createElement("div");
+  p.className = "petal";
+  p.style.left = Math.random() * 100 + "vw";
+  p.style.animationDuration = 10 + Math.random() * 10 + "s";
+  document.body.appendChild(p);
+  setTimeout(() => p.remove(), 20000);
 }
-
 setInterval(createPetal, 200);
+
+// Démarrage
 setTimeout(typeWriter, 1000);
-
-// Ajout d'un effet de confetti simple pour l'anniversaire (optionnel, si tu veux l'ajouter)
-function confetti() {
-  for (let i = 0; i < 50; i++) {
-    const conf = document.createElement("div");
-    conf.style.position = "absolute";
-    conf.style.left = Math.random() * 100 + "vw";
-    conf.style.top = "-10px";
-    conf.style.width = "10px";
-    conf.style.height = "10px";
-    conf.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`;
-    conf.style.animation = `fallConfetti ${Math.random() * 3 + 2}s linear`;
-    document.body.appendChild(conf);
-    setTimeout(() => conf.remove(), 5000);
-  }
-}
-/* Remove the @keyframes block from JS and add it to your CSS file */
-
-// Lancer confetti au chargement
-window.addEventListener("load", () => setTimeout(confetti, 2000));
